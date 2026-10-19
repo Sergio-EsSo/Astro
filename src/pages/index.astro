@@ -1,0 +1,33 @@
+---
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+//import Welcome from '../components/Welcome.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+//import Layout from '../layouts/Layout.astro';
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+const nombre = "Sergio"
+const favoritos = ["Comer", "Dormir", "Programar"]
+---
+
+<style>
+h1{
+	color: #4f4f4f;
+	text-align: center;
+	font-size: xx-large;
+}
+</style>
+
+<BaseLayout>
+	<h1>Mi primera pagina de astro</h1>
+	<p>Yo me llamo {nombre}</p>
+	<h2>hobbies</h2>
+	<ul>
+		{favoritos.map((favorito) => <li>{favorito}</li>)}
+	</ul>
+	<Button title="Tocame">Tocame</Button>
+	<br><br>
+	<Card/>
+</BaseLayout>
