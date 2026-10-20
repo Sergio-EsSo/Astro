@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+    <h1>Lista de productos usando CSR</h1>
+    <p>Fecha y hora <span id="fechaHora"></span></p>
+    <ul id="lista">
+
+    </ul>
+</BaseLayout>
+
+<script>
+    //react vue y angular
+    function cargarDatos(){
+        const productos = ['falda', 'camiseta', 'pantalon', 'calcetines']
+        const lista = document.getElementById('lista')
+        productos.forEach(p => {
+            const li = document.createElement('li')
+            lista?.appendChild(li)
+            li.textContent = p
+        })
+
+        const fechaHora = document.getElementById('fechaHora');
+        if(fechaHora){
+            fechaHora.textContent = new Date().toLocaleString('es-ES')
+        }
+    }
+    document.addEventListener('astro:page-load', cargarDatos)
+    
+</script>

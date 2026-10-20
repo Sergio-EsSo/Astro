@@ -1,0 +1,19 @@
+---
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const productos = ["Portatil", "Raton", "Teclado"]
+const fechahora = new Date().toLocaleString("es-ES")
+---
+
+<BaseLayout>
+	<h1>Lista productos usando SSG</h1>
+
+    <p>Fecha y hora: {fechahora}</p>
+    <span>Esta fecha se calcula cuando el servidor se inicia</span>
+
+	<ul>
+		{productos.map((favorito) => <li>{favorito}</li>)}
+	</ul>
+</BaseLayout>
