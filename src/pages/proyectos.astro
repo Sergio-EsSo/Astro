@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+//SSG -- Static Site Generating
+const projects = await getCollection('projects')
+---
+<BaseLayout>
+    <h1>Mis proyectos</h1>
+    <ul>
+        {projects.map(post => <li>
+            
+            <a href={'/proyectos/'+post.id}>{post.data.titulo}</a>
+            
+
+        </li>)}
+    </ul>
+</BaseLayout>

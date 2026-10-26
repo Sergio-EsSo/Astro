@@ -10,9 +10,8 @@ const posts = await getCollection('posts')
     <ul>
         {posts.map(post => <li>
             
-            <a href=""></a>
+            <a href={'/blog/'+post.id}>{post.data.titulo}</a>
             
-            {post.data.titulo}
 
         </li>)}
     </ul>
