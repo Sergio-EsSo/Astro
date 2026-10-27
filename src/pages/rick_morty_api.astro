@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const res = await fetch("https://rickandmortyapi.com/api/")
+if(!res.ok){
+    throw new Error("Fallo al conectarse a la api: "+res.status)
+}
+const datos = await res.json()
+---
+
+<BaseLayout>
+    <h1>Personajes Rick y Morty</h1>
+</BaseLayout>
