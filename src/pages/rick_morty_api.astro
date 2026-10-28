@@ -1,13 +1,35 @@
 ---
+import CardRyM from "../components/CardRyM.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const res = await fetch("https://rickandmortyapi.com/api/")
+const res = await fetch("https://rickandmortyapi.com/api/character")
+    
 if(!res.ok){
     throw new Error("Fallo al conectarse a la api: "+res.status)
 }
-const datos = await res.json()
+const datos = await res.json();
+const characters = datos.results;
 ---
 
 <BaseLayout>
     <h1>Personajes Rick y Morty</h1>
+
+    <div class="contenedor">
+        {characters.map((char: any) =>(
+            <CardRyM char={char}/>        
+        ))}
+    </div>
 </BaseLayout>
+
+<style>
+    .contenedor{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        background-color: peru;
+        padding: 5%;
+    }
+    h1{
+        text-align: center;
+    }
+</style>
