@@ -23,11 +23,12 @@ const characters = datos.results;
 
 <style>
     .contenedor{
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 15px;
-        background-color: peru;
-        padding: 5%;
+        justify-content: center;
+        background-color: rgb(224, 224, 224);
+        padding: 20px;
     }
     h1{
         text-align: center;
