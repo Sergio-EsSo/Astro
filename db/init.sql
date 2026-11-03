@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS almacen;
+
+USE almacen;
+
 CREATE TABLE productos(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre varchar(120) not null,

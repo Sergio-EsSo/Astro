@@ -8,11 +8,10 @@ const projects = await getCollection('projects')
 <BaseLayout>
     <h1>Mis proyectos</h1>
     <ul>
-        {projects.map(post => <li>
+        {projects.map(project => <li>
             
-            <a href={'/projects/'+post.id}>{post.data.titulo}</a>
+            <a href={'/proj/'+project.id}>{project.data.titulo}</a>
             
-
         </li>)}
     </ul>
 </BaseLayout>
