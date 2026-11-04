@@ -28,8 +28,23 @@ try{
                     <td>{producto.id}</td>
                     <td>{producto.nombre}</td>
                     <td>{producto.precio}</td>
+                    <td><button data-id={producto.id} class="boton">Borrar</button></td>
                 </tr>
             ))}
         </tbody>
     </div>
 </BaseLayout>
+
+<script>
+import { actions } from "astro:actions";
+
+    document.addEventListener("click", borrar)
+    async function borrar(event){
+        if(!event.target.classList.constains("boton")) return;
+        const id_borrar= event.target.dataset.id
+        console.log("Han pulsado en un boton con id:", id_borrar)
+        const {error} = await actions.productDelete({id: id_borrar})
+        if (error) console.error("Error al ejecutar la accion:", error)
+        window.location.reload(); 
+    }
+</script>

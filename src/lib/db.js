@@ -14,13 +14,18 @@ function getPool(){
         connectionLimit: 5,
         connectTimeout: 5000
     })
-
     return pool
 }
 
 export async function getAllProducts(){
-    const datos = await getPool().query(
-        'SELECT * from productos ORDER BY id'
+    const [productos] = await getPool().query(
+        'SELECT id, nombre, precio FROM productos ORDER BY id'
     )
-    return datos.productos
+    return productos
+}
+
+export async function deleteProduct(id){
+    await getPool().query(
+        'DELETE FROM productos WHERE id = ?', [id]
+    )
 }
