@@ -1,23 +1,102 @@
 ---
-import { getCollection } from 'astro:content';
-import { render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-export async function getStaticPaths(){
+export async function getStaticPaths() {
     const projects = await getCollection('projects');
     return projects.map((project) => ({
-        params: {id: project.id},
-        props: {project},
+        params: { id: project.id },
+        props: { project },
     }));
 }
 
-const project = Astro.props.project;
-const {Content} = await render(project);
+const { project } = Astro.props;
+const { Content } = await render(project);
 ---
 
 <BaseLayout>
-    <h1>Detalle del post</h1>
-    <h2>{project.data.titulo}</h2>
-    <p>{project.data.fecha} - {project.data.autor}</p>
-    <Content/>
+    <article class="post-container">
+        <!-- Cuadrado rojo: Título -->
+        <header class="box-titulo">
+            <h1>{project.data.titulo}</h1>
+            <p class="meta">{project.data.fecha} - {project.data.autor}</p>
+        </header>
+
+        <!-- Cuadrado verde: Texto / Contenido del post -->
+        <section class="box-texto">
+            <Content />
+        </section>
+
+        <!-- Cuadrados azules: Tres imágenes distintas -->
+        <section class="box-imagenes">
+            <div class="imagen-item">
+                <img src={project.data.imagen1} alt={`Imagen 1 de ${project.data.titulo}`} />
+            </div>
+            <div class="imagen-item">
+                <img src={project.data.imagen2} alt={`Imagen 2 de ${project.data.titulo}`} />
+            </div>
+            <div class="imagen-item">
+                <img src={project.data.imagen3} alt={`Imagen 3 de ${project.data.titulo}`} />
+            </div>
+        </section>
+    </article>
 </BaseLayout>
+
+<style>
+    .post-container {
+        max-width: 1100px;
+        margin: 2rem auto;
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* Cuadrado rojo: alineado a la izquierda y ocupando aprox. la mitad del ancho */
+    .box-titulo {
+        width: 50%;
+    }
+
+    .box-titulo h1 {
+        margin: 0 0 0.5rem 0;
+    }
+
+    .meta {
+        margin: 0;
+        opacity: 0.75;
+        font-size: 0.95rem;
+    }
+
+    /* Cuadrado verde: ancho completo del contenedor */
+    .box-texto {
+        width: 100%;
+        line-height: 1.6;
+    }
+
+    /* Cuadrados azules: 3 columnas iguales en horizontal */
+    .box-imagenes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .imagen-item img {
+        width: 100%;
+        height: 240px; /* Misma altura para las tres */
+        object-fit: contain; /* Muestra la imagen completa sin recortar */
+        background-color: #fdfaff; /* Opcional: rellena el espacio sobrante con el tono de fondo */
+        display: block;
+    }
+
+    /* Adaptación a móvil */
+    @media (max-width: 768px) {
+        .box-titulo {
+            width: 100%;
+        }
+
+        .box-imagenes {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
