@@ -11,21 +11,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
-    //react vue y angular
-    function cargarDatos(){
-        const productos = ['falda', 'camiseta', 'pantalon', 'calcetines']
-        const lista = document.getElementById('lista')
-        productos.forEach(p => {
-            const li = document.createElement('li')
-            lista?.appendChild(li)
-            li.textContent = p
-        })
+    function cargarDatos() {
+        const productos = ['falda', 'camiseta', 'pantalon', 'calcetines'];
+        const lista = document.getElementById('lista');
+        if (lista) {
+            lista.innerHTML = '';
+            productos.forEach((p) => {
+                const li = document.createElement('li');
+                li.textContent = p;
+                lista.appendChild(li);
+            });
+        }
 
         const fechaHora = document.getElementById('fechaHora');
-        if(fechaHora){
-            fechaHora.textContent = new Date().toLocaleString('es-ES')
+        if (fechaHora) {
+            fechaHora.textContent = new Date().toLocaleString('es-ES');
         }
     }
-    document.addEventListener('astro:page-load', cargarDatos)
-    
+
+    cargarDatos();
+    document.addEventListener('astro:page-load', cargarDatos);
 </script>
