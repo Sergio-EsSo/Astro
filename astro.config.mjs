@@ -7,7 +7,7 @@ import react from '@astrojs/react';
 
 import mdx from '@astrojs/mdx';
 
-import netlify from '@astrojs/netlify';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,5 +21,5 @@ export default defineConfig({
   },
 
   integrations: [react(), mdx()],
-  adapter: netlify()
+  adapter: vercel(),
 });

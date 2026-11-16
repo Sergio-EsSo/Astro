@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+export const prerender = false;
 
 const res = await fetch(new URL("/api/hora", Astro.url))
 const datos = await res.json()
